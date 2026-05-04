@@ -27,6 +27,7 @@ data class Team(
 data class Match(
     val matchId : Int,
     val round: String,
+    val date: String,
     val homeTeam: String,
     val awayTeam: String,
     val homeScore: Int? = null,

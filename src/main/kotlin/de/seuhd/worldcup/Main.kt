@@ -7,7 +7,7 @@ import kotlinx.serialization.decodeFromString
 fun main() {
     //TODO: Load JSON data
     //TODO: Implement interactive men
-    val json = File("world_cup_data.json").readText()
+    val json = File("src/main/resources/world_cup_2026_full_data.json").readText()
     val data = Json.decodeFromString<WorldCupData>(json)
 
 
@@ -102,3 +102,4 @@ private fun placeBets(allGroups: List<Group>) {
    ------------------------------------------------------------- */
 private fun showBettingScore(allGroups: List<Group>) {
 //TODO
+}
