@@ -167,4 +167,31 @@ private fun placeBets(allGroups: List<Group>) {
    ------------------------------------------------------------- */
 private fun showBettingScore(allGroups: List<Group>) {
 //TODO
+    var correct = 0
+    var incorrect = 0
+    var totalChecked = 0
+    for (bet in bets) {
+        for (group in allGroups) {
+            for (match in group.matches) {
+                if (match.matchId == bet.matchId) {
+
+                    // skip matches not played yet
+                    if (match.homeScore == null || match.awayScore == null) {
+                        continue
+                    }
+                    val actual = when {
+                        match.homeScore > match.awayScore -> 1
+                        match.homeScore < match.awayScore -> 2
+                        else -> 0
+                    }
+                    if (bet.prediction == actual) {
+                        correct++
+                    } else {
+                        incorrect++
+                    }
+                    totalChecked++
+                }
+            }
+        }
+    }
 }
