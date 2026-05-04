@@ -1,8 +1,15 @@
 package de.seuhd.worldcup
 
+import kotlinx.serialization.json.Json
+import java.io.File
+import kotlinx.serialization.decodeFromString
+
+
 fun main() {
     //TODO: Load JSON data
     //TODO: Implement interactive menu
+    val json = File("world_cup_data.json").readText()
+    val data = Json.decodeFromString<WorldCupData>(json)
 }
 
 /* -------------------------------------------------------------
