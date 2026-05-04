@@ -81,13 +81,35 @@ private fun showStandings(allGroups: List<Group>) {
 
 
 
-
-
 /* -------------------------------------------------------------
    2) Show Matches
    ------------------------------------------------------------- */
 private fun showMatches(allGroups: List<Group>) {
     //TODO
+    println("select matches u wanna see")
+    val groupselection = readln()
+    var found = false
+
+    for (group in allGroups){
+        if (group.name.equals(groupselection)){
+            found = true
+            println("===${group.name}: Matches ===")
+
+            for (match in group.matches){
+                val score =
+                    if (match.homeScore != null && match.awayScore != null){
+                        "${match.homeScore} : ${match.awayScore}"
+                    } else {
+                        "vs."
+                    }
+                println("${match.date} - ${match.homeTeam} $score ${match.awayTeam}")
+            }
+        }
+    }
+    if (!found){
+        println("invalid input")
+    }
+    readln()
 }
 
 /* -------------------------------------------------------------
