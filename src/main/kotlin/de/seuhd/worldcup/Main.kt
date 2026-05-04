@@ -194,4 +194,17 @@ private fun showBettingScore(allGroups: List<Group>) {
             }
         }
     }
+
+    println(
+        """
+        === betting score ===
+        total bets: $totalChecked
+        total correct predictions: $correct
+        total incorrect predictions: $incorrect
+        score: $correct points
+        """.trimIndent()
+
+    )
+
+    readln()
 }
