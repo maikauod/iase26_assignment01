@@ -47,3 +47,9 @@ data class Knockout(
     val ground: String
 
 )
+
+@Serializable
+data class Bet (
+    val matchId: Int,
+    val prediction: Int
+)

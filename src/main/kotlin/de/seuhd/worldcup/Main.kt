@@ -3,7 +3,7 @@ package de.seuhd.worldcup
 import kotlinx.serialization.json.Json
 import java.io.File
 import kotlinx.serialization.decodeFromString
-
+val bets = mutableListOf<Bet>()
 fun main() {
     //TODO: Load JSON data
     //TODO: Implement interactive men
@@ -13,14 +13,14 @@ fun main() {
 
     while(true) {
         println("""
-    === FIFA World Cup 2026 ? Betting Console ===
-    1) Show Standings
-    2) Show Matches
-    3) Place Bets
-    4) Show Betting Score
-    5) Exit
-    =================================================
-    Choose an option (1 to 5) :""".trimMargin())
+    |=== FIFA World Cup 2026 ? Betting Console ===
+    |1) Show Standings
+    |2) Show Matches
+    |3) Place Bets
+    |4) Show Betting Score
+    |5) Exit
+    |=================================================
+    |Choose an option (1 to 5) :""".trimMargin())
 
 
     when (readln()){
@@ -117,7 +117,50 @@ private fun showMatches(allGroups: List<Group>) {
    ------------------------------------------------------------- */
 private fun placeBets(allGroups: List<Group>) {
     //TODO
+    println("select group for betting")
+    val groupselection = readln()
+    var found = false
+    for (group in allGroups) {
+        if (group.name.equals(groupselection)) {
+            found = true
+            println("===${group.name}: PlaceBets ===")
+
+            for (match in group.matches) {
+                val h = group.teams.find { it.id == match.homeTeam }?.name ?: match.homeTeam
+                val a = group.teams.find { it.id == match.awayTeam }?.name ?: match.awayTeam
+
+                println(
+                    """
+                    |${match.date} - $h vs. $a"
+                   |enter tip:
+                    |1. home win
+                    |2. away win
+                    |3. draw
+                    """.trimMargin()
+                )
+
+                val betinput = readln()
+                if(betinput.isBlank()){
+                    println("going back to main menu")
+                    break
+                }
+                val prediction = when (betinput) {
+                    "1" -> 1
+                    "2" -> 2
+                    "3" -> 0
+                    else -> 0
+                }
+
+            bets.add(Bet(match.matchId, prediction))
+        }
+    }
 }
+         if (!found) {
+          println("invalid input")
+      }
+        println("changes saved")
+    readln()
+        }
 
 /* -------------------------------------------------------------
    4) Show Betting Score
